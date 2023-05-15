@@ -1,0 +1,114 @@
+### This is a demo of various REST calls to the server 
+
+### Add book Eugene Onegin written by Pushkin
+POST http://localhost:7000/books
+Content-Type: application/json
+
+{
+  "author": "Pushkin",
+  "title": "Eugene Onegin"
+}
+
+### Add book Mzyri written by Lermontov
+POST http://localhost:7000/books
+Content-Type: application/json
+
+{
+  "author": "Lermontov",
+  "title": "Mzyri"
+}
+
+### Add book Daemon written by Lermontov
+
+PUT http://localhost:7000/books?id=NZJxAag1YLW5xxHu
+Content-Type: application/json
+
+{
+  "author": "Lermontov",
+  "title": "Daemon"
+}
+
+### Add book Kobzar written by Shevchenko
+
+POST http://localhost:7000/books
+Content-Type: application/json
+
+{
+  "author": "Shevchenko",
+  "title": "Kobzar"
+}
+
+### Delete book with id rLVpt0xIRXae5wfS
+
+DELETE http://localhost:7000/books/rLVpt0xIRXae5wfS
+
+### Find all books
+
+GET http://localhost:7000/books
+
+### Find book by id
+
+GET http://localhost:7000/books/1EcN2dBFThBvHujn
+
+### Find all books written by Shevchenko
+
+GET http://localhost:7000/books?author=Shevchenko
+
+### Find book written by Shevchenko with name Kobzar
+
+GET http://localhost:7000/books?author=Shevchenko&title=Kobzar
+
+### Add new selection
+
+POST http://localhost:7000/selections
+Content-Type: application/json
+
+{
+  "author": "Vladimir Sonkin",
+  "title": "My classics4",
+  "email": "vladimir.sonkin@dxc.com",
+  "date": "09 21 2021 19:26:01"
+}
+
+### Add book NZJxAag1YLW5xxHu to selection with id mte3kBHUxui8sY58
+
+POST http://localhost:7000/selections/mte3kBHUxui8sY58/books
+Content-Type: application/json
+
+["NZJxAag1YLW5xxHu"]
+
+### Remove book from selection with id mte3kBHUxui8sY58
+
+DELETE http://localhost:7000/selections/mte3kBHUxui8sY58/books/NZJxAag1YLW5xxHu
+
+### Remove selection with id 4K4qduxMRYxTvRDv
+
+DELETE http://localhost:7000/selections/4K4qduxMRYxTvRDv
+
+### Add another book to selection with id mte3kBHUxui8sY58
+
+POST http://localhost:7000/selections/mte3kBHUxui8sY58/books
+Content-Type: application/json
+
+["isTIYBbuoX3OJa1b"]
+
+### Find all selections
+
+GET http://localhost:7000/selections
+
+### Find all selections of author Vladimir Sonkin
+
+GET http://localhost:7000/selections?author=Vladimir+Sonkin
+
+### Update selection with id mte3kBHUxui8sY58
+
+PUT http://localhost:7000/selections/mte3kBHUxui8sY58
+Content-Type: application/json
+
+{
+    "author": "Vladimir Sonkin",
+    "title": "My favourite classics",
+    "email": "vladimir.sonkin@dxc.com",
+    "date": "10 21 2021 20:26:01"
+}
+

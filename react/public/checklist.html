@@ -1,0 +1,249 @@
+<meta charset="utf-8">
+<title>Checklist</title>
+
+<style>
+    table tr:nth-child(odd) td{
+        background-color: #bee0ff;
+    }
+    table tr:nth-child(even) td{
+    }
+
+    table td {
+        padding: 5px;
+    }
+
+    table tr.new-module td {
+        border-top: dodgerblue 3px solid;
+    }
+
+    .doneMark:before {
+        color: red;
+        content: "+";
+        fontSize: 15pt;
+    }
+
+    #totalMark {
+        text-align: center;
+        position: fixed;
+        background: #bee0ff;
+        border: white 5px solid;
+        transform: translate(-50%, -50%);
+        left: 50%;
+        top: 0px;
+        padding: 10px;
+        width: 100%;
+    }
+
+    .header {
+        font-size:15pt;
+        padding-top:50px;
+        padding-bottom:20px;
+        text-align: center;
+    }
+
+</style>
+<script>
+    function loadMarks() {
+        const checkboxes = document.querySelectorAll("input[type=checkbox]")
+        for (let i=0; i<checkboxes.length; i++) {
+            const isDone = localStorage.getItem("task"+i)
+            if (isDone === "true") {
+                checkboxes[i].checked = true
+                setLineThrough(i, true)
+            } else {
+                checkboxes[i].checked = false
+                setLineThrough(i, false)
+            }
+        }
+        calcTotalMark()
+    }
+    function applyCalcMark() {
+        const checkboxes = document.querySelectorAll("input[type=checkbox]")
+        for (let i=0; i<checkboxes.length; i++) {
+            checkboxes[i].addEventListener("click", ()=> {
+                localStorage.setItem("task"+i, checkboxes[i].checked)
+                setLineThrough(i, checkboxes[i].checked)
+                calcTotalMark()
+            })
+        }
+    }
+
+    function setLineThrough(rowNum, isCrossedOut) {
+        const tasks = document.querySelectorAll("tr td:first-child")
+        const marks = document.querySelectorAll("tr td:last-child")
+        if (isCrossedOut) {
+            tasks[rowNum].style.textDecoration="line-through"
+            marks[rowNum].className="doneMark"
+        } else {
+            tasks[rowNum].style.textDecoration=""
+            marks[rowNum].className=""
+        }
+    }
+
+    function calcTotalMark() {
+        const marks = document.querySelectorAll("tr td:last-child")
+        const checkboxes = document.querySelectorAll("input[type=checkbox]")
+        let total = 0;
+        for (let i=0; i<marks.length; i++) {
+            if (checkboxes[i].checked) {
+                total += marks[i].innerText * 1;
+            }
+        }
+        document.getElementById("mark").innerHTML = total
+    }
+
+    function download_table_as_csv(table_id, separator = ',') {
+        var rows = document.querySelectorAll('table tr');
+        var csv = [];
+        for (var i = 0; i < rows.length; i++) {
+            var row = [], cols = rows[i].querySelectorAll('td, th');
+            for (var j = 0; j < cols.length; j++) {
+                if (i > 0 && j === 1) {
+                    if (cols[1].querySelector("input").checked) {
+                        row.push('"'+cols[2].innerText+'"');
+                    } else {
+                        row.push('"0"');
+                    }
+                } else {
+                    var data = cols[j].innerText.replace(/(\r\n|\n|\r)/gm, '').replace(/(\s\s)/gm, ' ')
+                    data = data.replace(/"/g, '""');
+                    row.push('"' + data + '"');
+                }
+            }
+            csv.push(row.join(separator));
+        }
+        var csv_string = csv.join('\n');
+        var filename = 'checklist_' + new Date().toLocaleDateString() + '.csv';
+        var link = document.createElement('a');
+        link.style.display = 'none';
+        link.setAttribute('target', '_blank');
+        link.setAttribute('href', 'data:text/csv;charset=utf-8,' + encodeURIComponent(csv_string));
+        link.setAttribute('download', filename);
+        document.body.appendChild(link);
+        link.click();
+        document.body.removeChild(link);
+    }
+
+</script>
+<body onload="applyCalcMark();loadMarks()">
+<div class="header"><b>Checklist of completed tasks</b>
+    <br><a href="#" onclick="download_table_as_csv();">Download CSV</a> (attach to the solution)
+</div>
+<i>In case of an incomplete or poor-quality solution, the points will be revised downward.</i>
+<h2 id="totalMark">Points scored: <span id="mark"></span></h2>
+<table>
+    <tr style="background-color: dodgerblue; color: white">
+        <th style="width: 50%">Task name</th>
+        <th>Status</th>
+        <th>Points</th>
+    </tr>
+    <tr>
+        <td>Optimize component redrawing using memoization (React.memo, React.callback, etc.)</td>
+        <td><input type="checkbox"></td>
+        <td>10</td>
+    </tr>
+    <tr class="new-module">
+        <td>Use the saga to get information about books,
+            with the ability to change the requested book,
+            stop downloading from the server, handle the error,
+            if the server is unavailable</td>
+        <td><input type="checkbox"></td>
+        <td>10</td>
+    </tr>
+    <tr>
+        <td>Use epic to get information about book selections,
+            with the ability to change the requested book,
+            stop downloading from the server, handle the error,
+            if the server is unavailable</td>
+        <td><input type="checkbox"></td>
+        <td>10</td>
+    </tr>
+    <tr class="new-module">
+        <td>Implement integration test for 1 component
+            (with server and async)
+            using @testing-library/react</td>
+        <td><input type="checkbox"></td>
+        <td>5</td>
+    </tr>
+    <tr>
+        <td>Component test with Server mocking</td>
+        <td><input type="checkbox"></td>
+        <td>5</td>
+    </tr>
+    <tr>
+        <td>Component test with Redux mocking</td>
+        <td><input type="checkbox"></td>
+        <td>5</td>
+    </tr>
+    <tr>
+        <td>Saga test</td>
+        <td><input type="checkbox"></td>
+        <td>3</td>
+    </tr>
+    <tr>
+        <td>Epic test</td>
+        <td><input type="checkbox"></td>
+        <td>3</td>
+    </tr>
+    <tr>
+        <td>Test for a reducer (at least one, not the easiest one)</td>
+        <td><input type="checkbox"></td>
+        <td>5</td>
+    </tr>
+    <tr>
+        <td>Test for the Redux Store - the whole process
+            of adding/deleting/viewing a book and
+            book list (use redux-dev-tools
+            for generation)</td>
+        <td><input type="checkbox"></td>
+        <td>5</td>
+    </tr>
+    <tr>
+        <td>E2E test for adding / deleting a book
+            (also take screenshots), use puppeteer or similar tool
+        </td>
+        <td><input type="checkbox"></td>
+        <td>5</td>
+    </tr>
+    <tr>
+        <td>E2E test for adding / deleting a selection of the books
+            (also take screenshots), use puppeteer or similar
+        </td>
+        <td><input type="checkbox"></td>
+        <td>5</td>
+    </tr>
+    <tr class="new-module">
+        <td>Use formik to enter and validate a book information</td>
+        <td><input type="checkbox"></td>
+        <td>5</td>
+    </tr>
+    <tr>
+        <td>Use react-hook-form to enter and validate the books selection information</td>
+        <td><input type="checkbox"></td>
+        <td>5</td>
+    </tr>
+    <tr class="new-module">
+        <td>Split project into 2 subprojects (BOOKS and SELECTIONS),
+            combining projects in monorepo,
+            using lerna or rush
+        </td>
+        <td><input type="checkbox"></td>
+        <td>10</td>
+    </tr>
+    <tr class="new-module">
+        <td>Create a Dockerfile to package the entire solution to docker
+        </td>
+        <td><input type="checkbox"></td>
+        <td>4</td>
+    </tr>
+    <!--tr class="new-module">
+        <td>Lazy loading functionality for adding a new selection
+            (download and show this functionality when clicking the link "add selection")
+        </td>
+        <td><input type="checkbox"></td>
+        <td>7</td>
+    </tr-->
+
+</table>
+
+</body>

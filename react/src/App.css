@@ -1,0 +1,133 @@
+.wrapper {
+  max-width: 700px;
+  margin: 0 auto;
+  padding: 15px 15px;
+}
+
+.books_wrapper {
+  background-color: rgba(161, 201, 255, 0.13);
+  border: 1px solid rgba(0, 0, 0, 0.13);
+  margin-bottom: 20px;
+  margin-top: 20px;
+}
+
+.books-list {
+  padding-top: 20px;
+}
+.selections_wrapper {
+  background-color: rgba(255, 200, 161, 0.13);
+  border: 1px solid rgba(0, 0, 0, 0.13);
+}
+.page_title {
+  text-align: center;
+}
+.add-book-to-selection-button {
+  margin-bottom: 30%;
+}
+.accordion-body .selection_list_item:last-child {
+  border: none;
+}
+
+.selection_list_item {
+  border-bottom: 1px solid #000;
+  padding: 10px 0;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+
+.remove_selection_btn {
+  display: block !important;
+  margin: 15px auto 0px;
+}
+
+.selection_control_wrap {
+  display: flex;
+  margin: 20px 0 10px;
+  align-items: center;
+}
+
+.selection_control_item,
+.create_selection_input, .create_book_input {
+  padding: 0 20px 10px 0;
+}
+
+.selection_control_item, .book_control_item {
+  width: 50%;
+}
+
+.book_control_item label,
+.selection_control_item label,
+.create_selection_input label {
+  margin-bottom: 10px;
+  position: relative;
+}
+
+
+.selection_control_add_btn {
+  margin-top: 23px;
+}
+
+.form_error {
+  position: absolute;
+  font-size: 13px;
+  color: #ff0000;
+}
+
+.create_book_form,
+.create_selection_form {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+}
+
+.create_selection_input {
+  width: 33.3%;
+  padding-right: 20px;
+}
+
+
+.create_book_form_add_btn_wrapper,
+.create_selection_form_add_btn_wrapper {
+  width: 100%;
+  margin-top: 15px!important;
+}
+
+.create_book_form_add_btn_wrapper .create_book_form_add_btn,
+.create_selection_form_add_btn_wrapper .create_selection_form_add_btn {
+  margin: 0 auto;
+  display: block;
+}
+
+.modal_overlay {
+  position: fixed;
+  width: 100%;
+  height: 100%;
+  top: 0;
+  left: 0;
+  background-color: rgba(0, 0, 0, .4);
+  z-index: 100;
+}
+
+.modal_wrap {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 101;
+  background-color: #fff;
+  border: 4px solid orange;
+}
+
+@media(max-width: 500px) {
+  .create_selection_form {
+    flex-direction: column;
+  }
+
+  .create_selection_input {
+    width: 100%;
+    padding-right: 0;
+    margin-bottom: 5px;
+  }
+}
