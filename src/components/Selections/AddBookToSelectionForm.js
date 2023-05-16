@@ -1,11 +1,12 @@
-import {useSelector, useDispatch} from 'react-redux'
-import {useState} from "react";
+import {useDispatch} from 'react-redux'
+import {useCallback, useState} from "react";
 import {addBookToSelection} from "../../actions/selection-actions";
 import {showError} from "../../actions/error-actions"
+import { memo } from 'react';
+import BookSelect from './BookSelect';
+import SelectionSelect from './SelectionSelect';
 
 function AddBookToSelectionForm() {
-  const books = useSelector(state => state.books)
-  const selections = useSelector(state => state.selections)
   const dispatch = useDispatch()
   const [bookId, setBookId] = useState("")
   const [selectionId, setSelectionId] = useState("")
@@ -18,28 +19,19 @@ function AddBookToSelectionForm() {
     }
   }
 
+  const handleBookSelect = useCallback((evt) => {
+    setBookId(evt.target.value);
+  }, []);
+
+  const handleSelectionSelect = useCallback((evt) => {
+    setSelectionId(evt.target.value);
+  }, []);
+
   return (
     <form  onSubmit={e=>{e.preventDefault(); onSubmit()}} className="selection_control_wrap">
       <div className="row">
-        <div className="selection_control_item col-md-4">
-          <label htmlFor="bookSelect">Add book</label>
-          <select className="form-select" id="bookSelect"
-                  onChange={e=>setBookId(e.target.value)}>
-            <option value="">Choose a book</option>
-              { books && books.map((el, i) =>
-                  <option key={i} value={el._id}>{el.title} by {el.author}</option>)}
-          </select>
-        </div>
-
-        <div className="selection_control_item col-md-5">
-          <label htmlFor="selectionSelect">to selection</label>
-          <select className="form-select" id="selectionSelect"
-                  onChange={e=>setSelectionId(e.target.value)}>
-            <option value="">Choose a selection</option>
-            { selections.data && selections.data.map((el, i) =>
-                <option key={i} value={el._id}>{el.title} by {el.author}</option>)}
-          </select>
-        </div>
+        <BookSelect onChange={handleBookSelect} />
+        <SelectionSelect onChange={handleSelectionSelect} />
 
         <div className="col-md-1 d-flex align-items-end">
           <button type="submit" className="btn btn-primary add-book-to-selection-button">Add</button>
@@ -49,4 +41,4 @@ function AddBookToSelectionForm() {
   )
 }
 
-export default AddBookToSelectionForm
+export default memo(AddBookToSelectionForm)

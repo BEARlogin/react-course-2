@@ -1,23 +1,27 @@
-import { useSelector, useDispatch } from 'react-redux'
 import {removeBook} from "../../actions/book-actions";
+import Book from './Book';
+import { useDispatch, useSelector } from 'react-redux';
+import { useCallback } from 'react';
+
 
 function Books() {
-  const books = useSelector(state => state.books)
-  const dispatch = useDispatch()
+    const books = useSelector(state => state.books)
+    const dispatch = useDispatch()
 
-  return (
-    <ul className="list-group books-list">
-      {books.map((book,idx) =>
-        <li key={idx} className="list-group-item d-flex justify-content-between align-items-center">
-          <span><strong>{book.title}</strong> by {book.author}</span>
-          <span className="pull-right">
-              <button type="button" className="btn btn-outline-danger btn-sm"
-                      onClick={()=>dispatch(removeBook(book._id))}>DELETE</button>
-          </span>
-        </li>
-      )}
-    </ul>
-  )
+    const handleDelete = useCallback(
+        (evt) => {
+            const bookId = evt.target.dataset.id;
+            dispatch(removeBook(bookId));
+        }, [dispatch]
+    );
+
+    return (
+        <ul className="list-group books-list">
+            {books.map((book) =>
+                <Book key={book._id} item={book} onDelete={handleDelete} />
+            )}
+        </ul>
+    )
 }
 
 export default Books

@@ -1,9 +1,8 @@
 import { useEffect } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
-import { Accordion } from 'react-bootstrap';
+import { useDispatch } from 'react-redux';
 
 //components
-import Selection from './components/Selections/Selection';
+import Selections from './components/Selections/Selections';
 import AddBookToSelectionForm from './components/Selections/AddBookToSelectionForm';
 import CreateSelectionForm from './components/Selections/CreateSelectionForm'
 import ErrorModal from "./components/Errors/ErrorModal"
@@ -16,31 +15,24 @@ import {fetchBooks} from "./actions/book-actions";
 import {fetchSelections} from "./actions/selection-actions";
 
 function App() {
-  const selections = useSelector(state => state.selections)
   const dispatch = useDispatch()
   useEffect(() => {
     dispatch(fetchBooks)
     dispatch(fetchSelections)
-  }, [])
+  }, [dispatch])
 
   return (
     <>
     <div className="wrapper books_wrapper">
       <h2 className="page_title">Books</h2>
       <CreateBookForm />
-      <Books/>
+      <Books />
     </div>
     <div className="wrapper selections_wrapper">
       <h2 className="page_title">Selections</h2>
       <CreateSelectionForm />
       <AddBookToSelectionForm />
-      { selections?.data.length > 0 && (
-        <Accordion>
-          {selections.data.map((el,i) => {
-            return <Selection key={i} item={el} itemKey={i} />
-          })}
-        </Accordion>
-      )}
+      <Selections />
     </div>
     <ErrorModal />
     </>

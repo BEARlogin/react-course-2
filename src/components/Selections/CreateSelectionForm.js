@@ -1,7 +1,8 @@
-import { useDispatch, useSelector } from 'react-redux'
+import { useDispatch } from 'react-redux'
 import {useState} from "react";
 import {createSelection} from "../../actions/selection-actions";
 import {isObjectEmpty, isStringEmpty} from "../../utils/utils";
+import {memo} from 'react';
 
 function CreateSelectionForm() {
   const dispatch = useDispatch()
@@ -62,4 +63,4 @@ function CreateSelectionForm() {
   )
 }
 
-export default CreateSelectionForm
+export default memo(CreateSelectionForm)
