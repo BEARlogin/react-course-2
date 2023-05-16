@@ -1,17 +1,60 @@
 {
-  "name": "book-server",
+  "name": "react-course",
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "start": "concurrently \"react-scripts start\" \"node server.js\"",
+    "build": "react-scripts build",
+    "test": "react-scripts test",
+    "eject": "react-scripts eject"
   },
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "body-parser": "^1.19.0",
+    "axios": "^0.24.0",
+    "bootstrap": "^5.1.1",
+    "chokidar": "^3.5.3",
+    "react": "^17.0.2",
+    "react-bootstrap": "^2.0.0-rc.0",
+    "react-dom": "^17.0.2",
+    "react-hook-form": "^7.16.0",
+    "react-redux": "^7.2.5",
+    "redux": "^4.1.1",
+    "redux-observable": "^2.0.0",
+    "redux-thunk": "^2.4.0",
+    "rxjs": "^7.3.0",
+    "thunk": "^0.0.1",
+    "web-vitals": "^1.1.2"
+  },
+  "devDependencies": {
+    "react-scripts": "4.0.3",
+    "redux-devtools-extension": "^2.13.9",
+    "@testing-library/jest-dom": "^5.14.1",
+    "@testing-library/react": "^11.2.7",
+    "@testing-library/user-event": "^12.8.3",
+    "body-parser": "^1.19.1",
+    "concurrently": "^8.0.1",
     "cors": "^2.8.5",
     "express": "^4.17.1",
     "nedb": "^1.8.0"
+  },
+  "eslintConfig": {
+    "extends": [
+      "react-app",
+      "react-app/jest"
+    ]
+  },
+  "browserslist": {
+    "production": [
+      ">0.2%",
+      "not dead",
+      "not op_mini all"
+    ],
+    "development": [
+      "last 1 chrome version",
+      "last 1 firefox version",
+      "last 1 safari version"
+    ]
   }
 }
