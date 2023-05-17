@@ -18,6 +18,7 @@
   background-color: rgba(255, 200, 161, 0.13);
   border: 1px solid rgba(0, 0, 0, 0.13);
 }
+
 .page_title {
   text-align: center;
 }
@@ -130,4 +131,20 @@
     padding-right: 0;
     margin-bottom: 5px;
   }
+}
+
+.themeRadio {
+  margin-right: 5px;
+}
+
+.themeSelector label {
+  margin-right: 20px;
+
+}
+
+.themeSelector {
+  position: fixed;
+  right: 0px;
+  background-color: rgba(0, 0, 0, .4);
+  z-index: 100;
 }
