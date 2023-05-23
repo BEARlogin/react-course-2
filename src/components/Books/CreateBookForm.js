@@ -1,14 +1,17 @@
-import {useState} from "react";
+import {useContext, useState} from "react";
 import {createBook} from "../../actions/book-actions";
 import {useDispatch} from "react-redux";
 import {isStringEmpty, isObjectEmpty} from "../../utils/utils"
+import { ErrorContext } from '../../context/ErrorContext';
 
 function CreateBookForm() {
   const dispatch = useDispatch()
   const [bookName, setBookName] = useState("")
   const [bookAuthor, setBookAuthor] = useState("")
   const [errors, setErrors] = useState({})
+  const errorCtx = useContext(ErrorContext);
   const onSubmit = async () => {
+
     let errors = {}
     if (isStringEmpty(bookName)) {
       errors.bookName='required'
@@ -26,6 +29,7 @@ function CreateBookForm() {
       setErrors({})
     } else {
       setErrors(errors)
+      errorCtx.addError('ОШИБКА ОЧЕНЬ СИЛЬНАЯ')
     }
   }
   return (

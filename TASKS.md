@@ -2,11 +2,11 @@
 
 The starting code are:
 1) Frontend (npm i, then **npm run start** in the **react** folder): http://localhost:3000 
-2) Backend (npm i, then **npm run start** in the **root** folder, the server starts on port 7000).
+2) Backend (npm i, then **npm run start** in the **root** folder, the server starts on port 8000).
 
 
 A CSV checklist of completed tasks must be attached to the solution
-(http://localhost:7000/checklist.html).
+(http://localhost:8000/checklist.html).
 Recommended to use GitHub classroom to share the solutions.
 
 ### TASKS ###

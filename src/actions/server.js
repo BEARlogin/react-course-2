@@ -1,7 +1,7 @@
 import {showError} from "./error-actions"
 import axios from "axios"
 
-const SERVER = axios.create({baseURL: 'http://localhost:7000'})
+const SERVER = axios.create({baseURL: 'http://localhost:8000'})
 
 let store = null
 

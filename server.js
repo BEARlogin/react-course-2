@@ -1,7 +1,7 @@
 const DELAY = 0 // delay in processing request
 const LOG_REST = true // logging of all REST calls
 const SUCCESS = "success" // response in case of successful operation
-const port = 7000
+const port = 8000
 
 const express = require('express')
 const app = express()
