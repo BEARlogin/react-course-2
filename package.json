@@ -7,6 +7,7 @@
     "start": "concurrently \"react-scripts start\" \"node server.js\"",
     "build": "react-scripts build",
     "test": "react-scripts test",
+    "eslint:fix": "eslint --fix",
     "eject": "react-scripts eject"
   },
   "author": "",
@@ -28,6 +29,7 @@
     "redux-thunk": "^2.4.2",
     "rxjs": "^7.8.1",
     "thunk": "^0.0.1",
+    "uuid": "^9.0.0",
     "web-vitals": "^1.1.2"
   },
   "devDependencies": {
