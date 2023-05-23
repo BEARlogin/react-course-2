@@ -1,8 +1,8 @@
-import { useContext } from 'react';
-import { ThemeContext } from '../context/ThemeContext';
+import { useContext } from 'react'
+import { ThemeContext } from '../context/ThemeContext'
 
 export const ThemeSelector = () => {
-    const {setTheme, themes, theme: curTheme} = useContext (ThemeContext);
+    const { setTheme, themes, theme: curTheme } = useContext(ThemeContext)
 
     return (<div className="themeSelector">
         <fieldset className="themeSelector">
@@ -15,6 +15,5 @@ export const ThemeSelector = () => {
                 </span>
             ))}
         </fieldset>
-    </div>);
-
-};
+    </div>)
+}

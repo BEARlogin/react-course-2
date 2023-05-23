@@ -1,20 +1,20 @@
 import { Accordion, Button } from 'react-bootstrap'
-import BookInSelection from './BookInSelection';
-import { memo } from 'react';
+import BookInSelection from './BookInSelection'
+import { memo } from 'react'
 
 const arePropsEqual = (oldProps, newProps) => {
-    const oldItem = oldProps.item;
-    const newItem = newProps.item;
+    const oldItem = oldProps.item
+    const newItem = newProps.item
     const result = !Object.keys(oldItem).some((key) => {
-        let changed = oldItem[key] !== newItem[key];
+        let changed = oldItem[key] !== newItem[key]
         if (key === 'books') {
             changed = JSON.stringify(oldItem.books.sort()) !== JSON.stringify(newItem.books.sort())
         }
 
         return changed
-    });
-    return result;
-};
+    })
+    return result
+}
 
 const Selection = (props) => {
     const { item, onDelete } = props
@@ -43,6 +43,6 @@ const Selection = (props) => {
     )
 }
 
-export const MemoisedSelection = memo(Selection, arePropsEqual);
+export const MemoisedSelection = memo(Selection, arePropsEqual)
 
 export default MemoisedSelection

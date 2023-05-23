@@ -1,7 +1,7 @@
 import { Button, Modal } from 'react-bootstrap'
 import { useSelector, useDispatch } from 'react-redux'
 
-function ErrorModal() {
+function ErrorModal () {
     const errorModal = useSelector(state => state.modal)
     const dispatch = useDispatch()
     return (

@@ -1,1 +1,1 @@
-export * from './SectionBackground';
+export * from './SectionBackground'

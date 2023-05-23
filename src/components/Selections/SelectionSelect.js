@@ -1,8 +1,7 @@
-import {useSelector} from 'react-redux'
-import {forwardRef} from 'react';
-import { memo } from 'react';
+import { useSelector } from 'react-redux'
+import { forwardRef, memo } from 'react'
 
-const SelectionSelect = forwardRef(({onChange, ...props}, ref) => {
+const SelectionSelect = forwardRef(({ onChange, ...props }, ref) => {
     const selections = useSelector(state => state.selections)
     return (<div className="selection_control_item col-md-5">
         <label htmlFor="selectionSelect">to selection</label>
@@ -13,9 +12,8 @@ const SelectionSelect = forwardRef(({onChange, ...props}, ref) => {
                 <option key={el._id} value={el._id}>{el.title} by {el.author}</option>)}
         </select>
     </div>
-    );
+    )
+})
 
-});
-
-SelectionSelect.displayName = 'SelectionSelect';
-export default memo(SelectionSelect);
+SelectionSelect.displayName = 'SelectionSelect'
+export default memo(SelectionSelect)

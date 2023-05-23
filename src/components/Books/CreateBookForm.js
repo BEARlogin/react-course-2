@@ -1,28 +1,27 @@
-import {useContext, useState} from 'react';
-import {createBook} from '../../actions/book-actions';
-import {useDispatch} from 'react-redux';
-import {isStringEmpty, isObjectEmpty} from '../../utils/utils'
-import { ErrorContext } from '../../context/ErrorContext';
+import { useContext, useState } from 'react'
+import { createBook } from '../../actions/book-actions'
+import { useDispatch } from 'react-redux'
+import { isStringEmpty, isObjectEmpty } from '../../utils/utils'
+import { ErrorContext } from '../../context/ErrorContext'
 
-function CreateBookForm() {
+function CreateBookForm () {
     const dispatch = useDispatch()
     const [bookName, setBookName] = useState('')
     const [bookAuthor, setBookAuthor] = useState('')
     const [errors, setErrors] = useState({})
-    const errorCtx = useContext(ErrorContext);
+    const errorCtx = useContext(ErrorContext)
     const onSubmit = async () => {
-
-        let errors = {}
+        const errors = {}
         if (isStringEmpty(bookName)) {
-            errors.bookName='required'
+            errors.bookName = 'required'
         }
         if (isStringEmpty(bookAuthor)) {
-            errors.bookAuthor='required'
+            errors.bookAuthor = 'required'
         }
         if (isObjectEmpty(errors)) {
             dispatch(createBook({
                 title: bookName,
-                author: bookAuthor,
+                author: bookAuthor
             }))
             setBookName('')
             setBookAuthor('')
@@ -34,17 +33,17 @@ function CreateBookForm() {
     }
     return (
         <div className="create_book_form_wrapper">
-            <form className="create_book_form row" onSubmit={e=>{e.preventDefault(); onSubmit()}}>
+            <form className="create_book_form row" onSubmit={e => { e.preventDefault(); onSubmit() }}>
                 <div className="create_book_input col-md-6" >
                     <label htmlFor="bookName" className="form-label">Book Title</label>
                     <input type="text" className="form-control" id="bookName" value={bookName}
-                        onChange={e=>setBookName(e.target.value)} />
+                        onChange={e => setBookName(e.target.value)} />
                     {errors.bookName && <span className="form_error">This field is required</span>}
                 </div>
                 <div className="create_book_input col-md-6">
                     <label htmlFor="bookAuthor" className="form-label">Book Author</label>
                     <input type="text" className="form-control" id="bookAuthor" value={bookAuthor}
-                        onChange={e=>setBookAuthor(e.target.value)} />
+                        onChange={e => setBookAuthor(e.target.value)} />
                     {errors.bookAuthor && <span className="form_error">This field is required</span>}
                 </div>
                 <div className="create_book_form_add_btn_wrapper">

@@ -1,12 +1,12 @@
-import {useDispatch} from 'react-redux'
-import {useCallback, useState} from 'react';
-import {addBookToSelection} from '../../actions/selection-actions';
-import {showError} from '../../actions/error-actions'
-import { memo } from 'react';
-import BookSelect from './BookSelect';
-import SelectionSelect from './SelectionSelect';
+import { useDispatch } from 'react-redux'
+import { useCallback, useState, memo } from 'react'
+import { addBookToSelection } from '../../actions/selection-actions'
+import { showError } from '../../actions/error-actions'
 
-function AddBookToSelectionForm() {
+import BookSelect from './BookSelect'
+import SelectionSelect from './SelectionSelect'
+
+function AddBookToSelectionForm () {
     const dispatch = useDispatch()
     const [bookId, setBookId] = useState('')
     const [selectionId, setSelectionId] = useState('')
@@ -20,15 +20,15 @@ function AddBookToSelectionForm() {
     }
 
     const handleBookSelect = useCallback((evt) => {
-        setBookId(evt.target.value);
-    }, []);
+        setBookId(evt.target.value)
+    }, [])
 
     const handleSelectionSelect = useCallback((evt) => {
-        setSelectionId(evt.target.value);
-    }, []);
+        setSelectionId(evt.target.value)
+    }, [])
 
     return (
-        <form  onSubmit={e=>{e.preventDefault(); onSubmit()}} className="selection_control_wrap">
+        <form onSubmit={e => { e.preventDefault(); onSubmit() }} className="selection_control_wrap">
             <div className="row">
                 <BookSelect onChange={handleBookSelect} />
                 <SelectionSelect onChange={handleSelectionSelect} />

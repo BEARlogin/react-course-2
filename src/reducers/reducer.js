@@ -6,7 +6,7 @@ export const reducer = (state = { books: [], selections: { data: [] } }, action)
             selections: {
                 ...state.selections,
                 data: action.payload
-            },
+            }
         }
     case 'FETCH_BOOKS_FULFILLED':
         return {
@@ -19,7 +19,7 @@ export const reducer = (state = { books: [], selections: { data: [] } }, action)
         return {
             ...state,
             book: {
-                selectionId: action.payload.selectionId, 
+                selectionId: action.payload.selectionId,
                 bookId: action.payload.bookId
             }
         }
@@ -28,7 +28,7 @@ export const reducer = (state = { books: [], selections: { data: [] } }, action)
             ...state,
             selections: {
                 ...state.selections,
-                ...action.payload,
+                ...action.payload
             }
         }
     case 'CREATE_BOOK':
@@ -36,7 +36,7 @@ export const reducer = (state = { books: [], selections: { data: [] } }, action)
             ...state,
             selections: {
                 ...state.books,
-                ...action.payload,
+                ...action.payload
             }
         }
     case 'CREATE_SELECTION_FULFILLED':
