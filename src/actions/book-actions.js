@@ -1,9 +1,9 @@
-import SERVER from "./server";
+import SERVER from './server';
 
 export const fetchBooks = async dispatch => {
     let res = await SERVER.get('/books')
     let books = res.data
-    dispatch({type: "FETCH_BOOKS_FULFILLED", payload: {books}})
+    dispatch({type: 'FETCH_BOOKS_FULFILLED', payload: {books}})
 }
 
 export const createBook = book => async dispatch => {

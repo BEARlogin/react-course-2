@@ -1,5 +1,5 @@
-import { useContext, createElement } from "react";
-import { ThemeContext } from "../../context/ThemeContext";
+import { useContext, createElement } from 'react';
+import { ThemeContext } from '../../context/ThemeContext';
 
 export const SectionBackground = ({tag = 'div', children, className, themeColorsMap = {}, ...props}) => {
     const {theme} = useContext (ThemeContext);

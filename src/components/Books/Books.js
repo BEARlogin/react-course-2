@@ -1,4 +1,4 @@
-import {removeBook} from "../../actions/book-actions";
+import {removeBook} from '../../actions/book-actions';
 import Book from './Book';
 import { useDispatch, useSelector } from 'react-redux';
 import { useCallback } from 'react';

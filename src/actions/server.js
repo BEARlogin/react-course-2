@@ -1,5 +1,5 @@
-import {showError} from "./error-actions"
-import axios from "axios"
+import {showError} from './error-actions'
+import axios from 'axios'
 
 const SERVER = axios.create({baseURL: 'http://localhost:8000'})
 
@@ -13,7 +13,7 @@ SERVER.interceptors.response.use(
     res => {
         if (res.data.err) {
             store.dispatch(
-                showError(typeof res.data.err == "string" ? res.data.err :
+                showError(typeof res.data.err == 'string' ? res.data.err :
                     JSON.stringify(res.data.err)))
             return Promise.reject(res.data.err)
         }

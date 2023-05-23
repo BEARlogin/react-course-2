@@ -1,5 +1,5 @@
-import { useContext } from "react";
-import { SayHelloContext } from "../context/SayHelloContext";
+import { useContext } from 'react';
+import { SayHelloContext } from '../context/SayHelloContext';
 
 export const User = () => {
     const {setName, name, sayHello} = useContext (SayHelloContext);
