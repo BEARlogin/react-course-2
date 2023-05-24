@@ -14,12 +14,21 @@ function Books () {
         }, [dispatch]
     )
 
+    const refreshBooks = () => {
+        dispatch(actions.fetchBooks())
+    }
+
     return (
-        <ul className="list-group books-list">
-            {books.map((book) =>
-                <Book key={book._id} item={book} onDelete={handleDelete} />
-            )}
-        </ul>
+        <>
+            <ul className="list-group books-list">
+                {books.map((book) =>
+                    <Book key={book._id} item={book} onDelete={handleDelete} />
+                )}
+            </ul>
+            <div className='mt-3'>
+                <button type="button" className="btn btn-primary" onClick={refreshBooks}>Refresh books</button>
+            </div>
+        </>
     )
 }
 

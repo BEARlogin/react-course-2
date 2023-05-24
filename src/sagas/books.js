@@ -1,4 +1,4 @@
-import { call, put, takeLatest, takeEvery, all } from 'redux-saga/effects'
+import { call, put, takeEvery, all, take, fork, cancel } from 'redux-saga/effects'
 
 import SERVER from '../actions/server'
 import { actions, ActionTypes } from '../actions/common'
@@ -9,7 +9,13 @@ function * fetchBooksWorker () {
 }
 
 export function * fetchBooksWatcher () {
-    yield takeLatest(ActionTypes.FETCH_BOOK_REQUEST, fetchBooksWorker)
+    let activeWorker = null
+    while (yield take(ActionTypes.FETCH_BOOK_REQUEST)) {
+        if (activeWorker !== null) {
+            yield cancel(activeWorker)
+        }
+        activeWorker = yield fork(fetchBooksWorker)
+    }
 }
 
 export function * createBookWorker ({ payload: { book } }) {
