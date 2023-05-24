@@ -1,6 +1,6 @@
 import { useSelector, useDispatch } from 'react-redux'
 import { Button } from 'react-bootstrap'
-import { removeBookFromSelection } from '../../actions/selection-actions'
+import { actions } from '../../actions/common'
 
 function BookInSelection (props) {
     const { bookId, selectionId } = props
@@ -11,7 +11,7 @@ function BookInSelection (props) {
         <div className="selection_list_item">
             <span><strong>{book?.title}</strong> by {book?.author}</span>
             <Button
-                onClick={() => dispatch(removeBookFromSelection(bookId, selectionId))}
+                onClick={() => dispatch(actions.removeBookFromSelection(bookId, selectionId))}
                 variant="outline-danger">Delete</Button>
         </div>
     )

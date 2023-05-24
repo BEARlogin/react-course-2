@@ -2,8 +2,8 @@ import { useSelector, useDispatch } from 'react-redux'
 import { Accordion } from 'react-bootstrap'
 import Selection from './Selection'
 
-import { removeSelection } from '../../actions/selection-actions'
 import { useCallback } from 'react'
+import { actions } from '../../actions/common'
 
 export const Selections = () => {
     const selections = useSelector(state => state.selections)
@@ -12,7 +12,7 @@ export const Selections = () => {
     const handleDelete = useCallback(
         (evt) => {
             const selectionId = evt.target.dataset.id
-            dispatch(removeSelection(selectionId))
+            dispatch(actions.removeSelection(selectionId))
         }, [dispatch]
     )
 

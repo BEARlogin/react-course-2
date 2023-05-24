@@ -1,10 +1,10 @@
 import { useDispatch } from 'react-redux'
 import { useCallback, useState, memo } from 'react'
-import { addBookToSelection } from '../../actions/selection-actions'
 import { showError } from '../../actions/error-actions'
 
 import BookSelect from './BookSelect'
 import SelectionSelect from './SelectionSelect'
+import { actions } from '../../actions/common'
 
 function AddBookToSelectionForm () {
     const dispatch = useDispatch()
@@ -13,7 +13,7 @@ function AddBookToSelectionForm () {
 
     const onSubmit = () => {
         if (bookId && selectionId) {
-            dispatch(addBookToSelection(bookId, selectionId))
+            dispatch(actions.addBookToSelection(bookId, selectionId))
         } else {
             dispatch(showError('Please select book and selection'))
         }

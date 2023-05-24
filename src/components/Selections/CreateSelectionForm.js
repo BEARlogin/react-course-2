@@ -1,7 +1,7 @@
 import { useDispatch } from 'react-redux'
 import { useState, memo } from 'react'
-import { createSelection } from '../../actions/selection-actions'
 import { isObjectEmpty, isStringEmpty } from '../../utils/utils'
+import { actions } from '../../actions/common'
 
 function CreateSelectionForm () {
     const dispatch = useDispatch()
@@ -19,7 +19,7 @@ function CreateSelectionForm () {
             errors.selectionAuthor = 'required'
         }
         if (isObjectEmpty(errors)) {
-            dispatch(createSelection({
+            dispatch(actions.createSelection({
                 title: selectionName,
                 author: selectionAuthor,
                 email: selectionEmail

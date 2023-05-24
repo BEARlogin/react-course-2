@@ -1,6 +1,8 @@
+import { ActionTypes } from '../actions/common'
+
 export const reducer = (state = { books: [], selections: { data: [] } }, action) => {
     switch (action.type) {
-    case 'FETCH_SELECTIONS_FULFILLED':
+    case ActionTypes.FETCH_SELECTIONS_FULFILLED:
         return {
             ...state,
             selections: {
@@ -8,14 +10,14 @@ export const reducer = (state = { books: [], selections: { data: [] } }, action)
                 data: action.payload
             }
         }
-    case 'FETCH_BOOKS_FULFILLED':
+    case ActionTypes.FETCH_BOOKS_FULFILLED:
         return {
             ...state,
             books: [
                 ...action.payload.books
             ]
         }
-    case 'REMOVE_BOOK_FROM_SELECTION':
+    case ActionTypes.REMOVE_BOOK_FROM_SELECTION:
         return {
             ...state,
             book: {
@@ -23,23 +25,7 @@ export const reducer = (state = { books: [], selections: { data: [] } }, action)
                 bookId: action.payload.bookId
             }
         }
-    case 'CREATE_SELECTION':
-        return {
-            ...state,
-            selections: {
-                ...state.selections,
-                ...action.payload
-            }
-        }
-    case 'CREATE_BOOK':
-        return {
-            ...state,
-            selections: {
-                ...state.books,
-                ...action.payload
-            }
-        }
-    case 'CREATE_SELECTION_FULFILLED':
+    case ActionTypes.CREATE_SELECTION_FULFILLED:
         return {
             ...state,
             selections: {
@@ -48,7 +34,7 @@ export const reducer = (state = { books: [], selections: { data: [] } }, action)
                 newSelection: null
             }
         }
-    case 'CREATE_BOOK_FULFILLED':
+    case ActionTypes.CREATE_BOOK_FULFILLED:
         return {
             ...state,
             selections: {
@@ -57,7 +43,7 @@ export const reducer = (state = { books: [], selections: { data: [] } }, action)
                 newSelection: null
             }
         }
-    case 'HIDE_ERROR_MODAL':
+    case ActionTypes.HIDE_ERROR_MODAL:
         return {
             ...state,
             modal: {
@@ -66,7 +52,7 @@ export const reducer = (state = { books: [], selections: { data: [] } }, action)
             }
         }
 
-    case 'SHOW_ERROR_MODAL':
+    case ActionTypes.SHOW_ERROR_MODAL:
         return {
             ...state,
             modal: {
