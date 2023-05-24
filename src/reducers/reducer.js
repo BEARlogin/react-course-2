@@ -1,6 +1,8 @@
 import { ActionTypes } from '../actions/common'
 
-export const reducer = (state = { books: [], selections: { data: [] } }, action) => {
+const defaultState = { books: [], selections: { data: [] }, fetchingBooks: false }
+
+export const reducer = (state = defaultState, action) => {
     switch (action.type) {
     case ActionTypes.FETCH_SELECTIONS_FULFILLED:
         return {
@@ -60,6 +62,18 @@ export const reducer = (state = { books: [], selections: { data: [] } }, action)
                 message: action.payload.message,
                 isShow: true
             }
+        }
+
+    case ActionTypes.FETCHING_BOOKS:
+        return {
+            ...state,
+            fetchingBooks: action.payload.fetchingBooks
+        }
+
+    case ActionTypes.REQUEST_IS_TIMED_OUT:
+        return {
+            ...state,
+            requestIsTimedOut: action.payload.requestIsTimedOut
         }
     default:
         return state
