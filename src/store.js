@@ -4,11 +4,11 @@ import { reducer } from './reducers/reducer'
 import { composeWithDevTools } from 'redux-devtools-extension'
 import createSagaMiddleware from 'redux-saga'
 import selectionsRootSaga from './sagas/selections'
-import { booksSaga } from './sagas/books'
+import booksRootSaga from './sagas/books'
 
 export default function * rootSaga () {
     yield all([
-        booksSaga(),
+        booksRootSaga(),
         selectionsRootSaga()
     ])
 }

@@ -3,7 +3,7 @@ export const ActionTypes = Object.freeze({
     FETCH_BOOKS_FULFILLED: 'FETCH_BOOKS_FULFILLED',
     CREATE_BOOK_REQUEST: 'CREATE_BOOK_REQUEST',
     CREATE_BOOK_FULFILLED: 'CREATE_BOOK_FULFILLED',
-    REMOVE_BOOK: 'REMOVE_BOOK',
+    REMOVE_BOOK_REQUEST: 'REMOVE_BOOK_REQUEST',
 
     REMOVE_BOOK_FROM_SELECTION: 'REMOVE_BOOK_FROM_SELECTION',
     ADD_BOOK_TO_SELECTION_REQUEST: 'ADD_BOOK_TO_SELECTION_REQUEST',
@@ -22,7 +22,7 @@ export const actions = {
     fetchBooks: () => ({ type: ActionTypes.FETCH_BOOK_REQUEST }),
     fetchBooksFulFilled: (books) => ({ type: ActionTypes.FETCH_BOOKS_FULFILLED, payload: { books } }),
     createBook: (book) => ({ type: ActionTypes.CREATE_BOOK_REQUEST, payload: { book } }),
-    removeBook: (id) => ({ type: ActionTypes.REMOVE_BOOK, payload: { id } }),
+    removeBook: (id) => ({ type: ActionTypes.REMOVE_BOOK_REQUEST, payload: { id } }),
     addBookToSelection: (bookId, selectionId) => ({ type: ActionTypes.ADD_BOOK_TO_SELECTION_REQUEST, payload: { bookId, selectionId } }),
     removeBookFromSelection: (bookId, selectionId) => ({ type: ActionTypes.REMOVE_BOOK_FROM_SELECTION, payload: { bookId, selectionId } }),
 

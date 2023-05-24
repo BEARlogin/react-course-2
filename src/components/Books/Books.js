@@ -1,7 +1,7 @@
-import { removeBook } from '../../actions/book-actions'
 import Book from './Book'
 import { useDispatch, useSelector } from 'react-redux'
 import { useCallback } from 'react'
+import { actions } from '../../actions/common'
 
 function Books () {
     const books = useSelector(state => state.books)
@@ -10,7 +10,7 @@ function Books () {
     const handleDelete = useCallback(
         (evt) => {
             const bookId = evt.target.dataset.id
-            dispatch(removeBook(bookId))
+            dispatch(actions.removeBook(bookId))
         }, [dispatch]
     )
 
