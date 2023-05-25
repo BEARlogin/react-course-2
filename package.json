@@ -53,6 +53,7 @@
     "nedb": "^1.8.0",
     "react-scripts": "5.0.1",
     "redux-devtools-extension": "^2.13.9",
+    "redux-saga-test-plan": "^4.0.6",
     "typescript": "^5.0.4"
   },
   "eslintConfig": {
