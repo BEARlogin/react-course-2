@@ -1,11 +1,11 @@
-import { call, put, takeEvery, all, take, fork, cancel, race, delay, takeLatest } from 'redux-saga/effects'
+import { call, put, takeEvery, all, take, race, delay, takeLatest } from 'redux-saga/effects'
 
 import SERVER from '../actions/server'
 import { actions, ActionTypes } from '../actions/common'
 
 const REQUEST_TIMEOUT = 12000
 
-function * fetchBooksWorker () {
+export function * fetchBooksWorker () {
     yield put(actions.fetchingBooks(true))
     const [response, timeout] = yield race([
         call(SERVER.get, '/books'),
@@ -25,6 +25,7 @@ function * fetchBooksWorker () {
 
 export function * fetchBooksWatcher () {
     yield takeLatest(ActionTypes.FETCH_BOOK_REQUEST, fetchBooksWorker)
+    // Пример, не удалять!
     // let activeWorker = null
     // while (yield take(ActionTypes.FETCH_BOOK_REQUEST)) {
     //     if (activeWorker !== null) {
