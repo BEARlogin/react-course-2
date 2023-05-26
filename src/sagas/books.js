@@ -55,7 +55,7 @@ export function * removeBookWatcher () {
 
 export default function * booksRootSaga () {
     yield all([
-        fetchBooksWatcher(),
+        // fetchBooksWatcher(),
         createBookWatcher(),
         removeBookWatcher()
     ])

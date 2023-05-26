@@ -1,6 +1,6 @@
 import { ofType } from 'redux-observable'
 import { actions, ActionTypes } from '../actions/common'
-import { map, startWith, switchMap, Observable, takeUntil, timer } from 'rxjs'
+import { map, startWith, switchMap, Observable, takeUntil, timer, filter } from 'rxjs'
 import SERVER from '../actions/server'
 
 const fromPromise = (promise) => new Observable((subscriber) => {
@@ -18,22 +18,37 @@ export const fetchBooksEpic = (action$) => {
             //     })
             // })
             return fromPromise(SERVER.get('/books')).pipe(
+                map((result) => {
+                    console.log('/books result in pipe start', result)
+                    return result
+                }),
                 map((result) => actions.fetchBooksFulFilled(result.data)),
                 takeUntil(timer(5000)),
+                takeUntil(action$.pipe(
+                    ofType(ActionTypes.CANCEL_FETCH_BOOK)
+                )),
                 startWith((() => {
                     console.log('startWith inside')
-                    return actions.fetchingBooks(false)
+                    return actions.fetchingBooks(true)
                 })())
             )
-        }),
-        map((action) => {
-            console.log('action before takeUntil', action)
-            return action
-        }),
-        startWith((() => {
-            console.log('startWith action')
-            return actions.fetchingBooks(true)
-        })())
+        })
 
     )
 }
+
+export const cancelFetchBooksEpic = (action$) => action$.pipe(
+    filter((action) => action.type === ActionTypes.CANCEL_FETCH_BOOK),
+    map((action) => {
+        console.log('cancelFetchBooksEpic() action=', action)
+        return actions.fetchingBooks(false)
+    })
+)
+
+export const onFetchBooksFulFilled = (action$) => action$.pipe(
+    filter((action) => action.type === ActionTypes.FETCH_BOOKS_FULFILLED),
+    map((action) => {
+        console.log('onFetchBooksFulFilled() action=', action)
+        return actions.fetchingBooks(false)
+    })
+)
