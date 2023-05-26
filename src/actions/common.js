@@ -19,7 +19,8 @@ export const ActionTypes = Object.freeze({
     HIDE_ERROR_MODAL: 'HIDE_ERROR_MODAL',
     SHOW_ERROR_MODAL: 'SHOW_ERROR_MODAL',
 
-    REQUEST_IS_TIMED_OUT: 'REQUEST_IS_TIMED_OUT'
+    REQUEST_IS_TIMED_OUT: 'REQUEST_IS_TIMED_OUT',
+    LOG_ACTION: 'LOG_ACTION'
 })
 
 export const actions = {

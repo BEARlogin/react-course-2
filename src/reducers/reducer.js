@@ -1,6 +1,13 @@
 import { ActionTypes } from '../actions/common'
 
-const defaultState = { books: [], selections: { data: [] }, fetchingBooks: false }
+const defaultState = {
+    books: [],
+    selections: {
+        data: []
+    },
+    fetchingBooks: false,
+    actions: []
+}
 
 export const reducer = (state = defaultState, action) => {
     switch (action.type) {
@@ -74,6 +81,15 @@ export const reducer = (state = defaultState, action) => {
         return {
             ...state,
             requestIsTimedOut: action.payload.requestIsTimedOut
+        }
+
+    case ActionTypes.LOG_ACTION:
+        return {
+            ...state,
+            actions: [
+                ...state.actions,
+                action.payload
+            ]
         }
     default:
         return state
