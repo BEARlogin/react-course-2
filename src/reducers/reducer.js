@@ -1,6 +1,6 @@
 import { ActionTypes } from '../actions/common'
 
-const defaultState = {
+export const defaultState = {
     books: [],
     selections: {
         data: []

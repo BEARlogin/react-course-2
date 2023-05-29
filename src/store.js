@@ -9,6 +9,7 @@ import { map, filter } from 'rxjs'
 import { combineEpics, createEpicMiddleware } from 'redux-observable'
 import { ActionTypes } from './actions/common'
 import { fetchBooksEpic, cancelFetchBooksEpic, onFetchBooksFulFilled } from './epics/books'
+import SERVER from './actions/server'
 
 export default function * rootSaga () {
     yield all([
@@ -32,7 +33,7 @@ export const rootEpic = combineEpics(
     onFetchBooksFulFilled
 )
 
-const epicMiddleware = createEpicMiddleware()
+const epicMiddleware = createEpicMiddleware({ dependencies: { SERVER } })
 
 const sagaMiddleware = createSagaMiddleware()
 
