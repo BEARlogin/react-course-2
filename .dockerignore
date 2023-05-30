@@ -1,0 +1,6 @@
+.idea
+.vscode
+node_modules
+docker
+docker-compose.yml
+.dockerignore

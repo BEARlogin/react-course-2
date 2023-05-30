@@ -1,0 +1,9 @@
+version: '3.8'
+
+services:
+  api:
+    build: 
+      dockerfile: ./docker/Dockerfile.server
+    ports:
+      - '8082:8000'
+    
