@@ -7,10 +7,12 @@ import { ThemeContext } from '../context/ThemeContext'
 
 export const BooksWrapper = () => {
     const { themes } = useContext(ThemeContext)
-    return <SectionBackground className={'wrapper books_wrapper'} themeColorsMap={{ [themes.dark]: 'grey' }}>
-        <Typography tag="h2" className="page_title">Books</Typography>
+    return (
+        <SectionBackground className={'wrapper books_wrapper'} themeColorsMap={{ [themes.dark]: 'grey' }}>
+            <Typography tag="h2" className="page_title">Books</Typography>
 
-        <CreateBookForm />
-        <Books />
-    </SectionBackground>
+            <CreateBookForm/>
+            <Books/>
+        </SectionBackground>
+    )
 }

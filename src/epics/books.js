@@ -11,7 +11,6 @@ export const fetchBooksEpic = (action$) => {
     return action$.pipe(
         ofType(ActionTypes.FETCH_BOOK_REQUEST),
         switchMap((action) => {
-            console.log('switchMap action')
             // return new Promise((resolve) => {
             //     SERVER.get('/books').then((result) => {
             //         resolve(actions.fetchBooksFulFilled(result.data))
@@ -19,7 +18,6 @@ export const fetchBooksEpic = (action$) => {
             // })
             return fromPromise(SERVER.get('/books')).pipe(
                 map((result) => {
-                    console.log('/books result in pipe start', result)
                     return result
                 }),
                 map((result) => actions.fetchBooksFulFilled(result.data)),
@@ -28,7 +26,6 @@ export const fetchBooksEpic = (action$) => {
                     ofType(ActionTypes.CANCEL_FETCH_BOOK)
                 )),
                 startWith((() => {
-                    console.log('startWith inside')
                     return actions.fetchingBooks(true)
                 })())
             )
@@ -48,7 +45,7 @@ export const cancelFetchBooksEpic = (action$) => action$.pipe(
 export const onFetchBooksFulFilled = (action$) => action$.pipe(
     filter((action) => action.type === ActionTypes.FETCH_BOOKS_FULFILLED),
     map((action) => {
-        console.log('onFetchBooksFulFilled() action=', action)
+        console.log('onFetchBooksFulFilled() action=', JSON.stringify(action))
         return actions.fetchingBooks(false)
     })
 )

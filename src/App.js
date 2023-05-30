@@ -13,7 +13,6 @@ import { actions } from './actions/common'
 function App () {
     const dispatch = useDispatch()
     useEffect(() => {
-        dispatch(actions.fetchBooks())
         dispatch(actions.fetchSelections())
     }, [dispatch])
 

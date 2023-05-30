@@ -11,7 +11,7 @@ const arePropsEqual = (oldProps, newProps) => {
 }
 
 export const Book = ({ item, onDelete }) => {
-    return <li className="list-group-item d-flex justify-content-between align-items-center">
+    return <li className="list-group-item d-flex justify-content-between align-items-center" data-testid="book-item">
         <span><strong>{item.title}</strong> by {item.author}</span>
         <span className="pull-right">
             <button

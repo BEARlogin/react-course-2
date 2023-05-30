@@ -6,6 +6,7 @@ import { ErrorContext } from '../../context/ErrorContext'
 
 function Books () {
     const books = useSelector(state => state.books)
+    console.log('books', books)
     const fetchingBooks = useSelector(state => state.fetchingBooks)
     const requestIsTimedOut = useSelector(state => state.requestIsTimedOut)
     const dispatch = useDispatch()
@@ -25,10 +26,13 @@ function Books () {
     const cancelFetchBooks = () => {
         dispatch(actions.cancelFetchBooks())
     }
+
     const refreshCaption = fetchingBooks ? 'Cancel fetch books' : 'Refresh books'
     const onClick = fetchingBooks ? cancelFetchBooks : refreshBooks
 
     useEffect(() => {
+        dispatch(actions.fetchBooks())
+
         if (requestIsTimedOut === true) {
             dispatch(actions.requestIsTimedOut(false))
             errorCtx.addError('Слишком долгий запрос списка книг')
@@ -37,9 +41,13 @@ function Books () {
 
     return (
         <>
-            <ul className="list-group books-list">
+            <ul className="list-group books-list" data-testid="books-list">
                 {books.map((book) =>
-                    <Book key={book._id} item={book} onDelete={handleDelete} />
+                    <Book
+                        key={book._id}
+                        item={book}
+                        onDelete={handleDelete}
+                    />
                 )}
             </ul>
             <div className='mt-3'>
