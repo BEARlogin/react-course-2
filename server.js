@@ -1,4 +1,4 @@
-const DELAY = 2000 // delay in processing request
+const DELAY = 10000 // delay in processing request
 const LOG_REST = true // logging of all REST calls
 const SUCCESS = 'success' // response in case of successful operation
 const port = 8000
