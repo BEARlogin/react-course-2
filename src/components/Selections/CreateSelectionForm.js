@@ -1,58 +1,47 @@
 import { useDispatch } from 'react-redux'
-import { useState, memo } from 'react'
-import { isObjectEmpty, isStringEmpty } from '../../utils/utils'
+import { memo } from 'react'
 import { actions } from '../../actions/common'
+import { useForm } from 'react-hook-form'
+import * as yup from 'yup'
+import { yupResolver } from '@hookform/resolvers/yup'
 
 function CreateSelectionForm () {
-    const dispatch = useDispatch()
-    const [selectionName, setSelectionName] = useState('')
-    const [selectionAuthor, setSelectionAuthor] = useState('')
-    const [selectionEmail, setSelectionEmail] = useState('')
+    const schema = yup.object().shape({
+        title: yup.string().required(),
+        author: yup.string().required(),
+        email: yup.string()
+    })
 
-    const [errors, setErrors] = useState({})
-    const onSubmit = async () => {
-        const errors = {}
-        if (isStringEmpty(selectionName)) {
-            errors.selectionName = 'required'
-        }
-        if (isStringEmpty(selectionAuthor)) {
-            errors.selectionAuthor = 'required'
-        }
-        if (isObjectEmpty(errors)) {
-            dispatch(actions.createSelection({
-                title: selectionName,
-                author: selectionAuthor,
-                email: selectionEmail
-            }))
-            setSelectionName('')
-            setSelectionAuthor('')
-            setSelectionEmail('')
-            setErrors({})
-        } else {
-            setErrors(errors)
-        }
+    const { register, handleSubmit, formState: { errors } } = useForm({
+        resolver: yupResolver(schema)
+    })
+
+    const dispatch = useDispatch()
+    const onSubmit = (values) => {
+        dispatch(actions.createSelection({
+            title: values.title,
+            author: values.author,
+            email: values.email
+        }))
     }
 
     return (
         <div className="create_selection_form_wrapper">
-            <form className="create_selection_form row" onSubmit={e => { e.preventDefault(); onSubmit() }}>
+            <form className="create_selection_form row" onSubmit={handleSubmit(onSubmit)}>
                 <div className="create_selection_input col-md-4" >
-                    <label htmlFor="selectionName" className="form-label">Selection Title</label>
-                    <input type="text" className="form-control" id="selectionName" value={selectionName}
-                        onChange={e => setSelectionName(e.target.value)} />
-                    {errors.selectionName && <span className="form_error">This field is required</span>}
+                    <label htmlFor="title" className="form-label">Selection Title</label>
+                    <input className="form-control" id="title" {...register('title')} />
+                    {errors.title && <span className="form_error">This field is required</span>}
                 </div>
                 <div className="create_selection_input col-md-4">
-                    <label htmlFor="selectionAuthor" className="form-label">Selection Author</label>
-                    <input type="text" className="form-control" id="selectionAuthor" value={selectionAuthor}
-                        onChange={e => setSelectionAuthor(e.target.value)} />
-                    {errors.selectionAuthor && <span className="form_error">This field is required</span>}
+                    <label htmlFor="author" className="form-label">Selection Author</label>
+                    <input className="form-control" id="author" {...register('author')} />
+                    {errors.author && <span className="form_error">This field is required</span>}
                 </div>
                 <div className="create_selection_input col-md-4">
-                    <label htmlFor="selectionAuthor" className="form-label">E-mail</label>
-                    <input type="text" className="form-control" id="selectionAuthor" value={selectionEmail}
-                        onChange={e => setSelectionEmail(e.target.value)} />
-                    {errors.selectionEmail && <span className="form_error">This field is required</span>}
+                    <label htmlFor="email" className="form-label">E-mail</label>
+                    <input className="form-control" id="email" {...register('email')} />
+                    {errors.email && <span className="form_error">This field is required</span>}
                 </div>
                 <div className="create_selection_form_add_btn_wrapper">
                     <button type="submit" className="btn btn-primary">Create selection</button>

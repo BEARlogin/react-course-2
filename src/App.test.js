@@ -2,6 +2,9 @@ import { render, screen } from '@testing-library/react'
 import App from './App'
 import { Provider } from 'react-redux'
 import { store } from './store'
+import { injectStoreToServer } from './actions/server'
+
+injectStoreToServer(store)
 
 it('renders "Book Author" title', () => {
     render(

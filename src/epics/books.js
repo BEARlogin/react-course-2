@@ -6,7 +6,7 @@ const fromPromise = (promise) => new Observable((subscriber) => {
     promise.then((result) => subscriber.next(result))
 })
 
-export const fetchBooksEpic = (action$, _, { SERVER }) => {
+export const fetchBooksEpicType1 = (action$, _, { SERVER }) => {
     return action$.pipe(
         ofType(ActionTypes.FETCH_BOOK_REQUEST),
         switchMap((action) => {
@@ -36,7 +36,34 @@ export const fetchBooksEpic = (action$, _, { SERVER }) => {
     )
 }
 
-export const cancelFetchBooksEpic = (action$) => action$.pipe(
+export const fetchBooksEpic = (action$, _, { SERVER }) => {
+    return action$.pipe(
+        ofType(ActionTypes.FETCH_BOOK_REQUEST),
+        switchMap(() => {
+            return new Observable((observer) => {
+                observer.next(actions.fetchingBooks(true))
+                const req$ = fromPromise(SERVER.get('/books')).pipe(
+                    takeUntil(timer(5000)),
+                    takeUntil(action$.pipe(
+                        ofType(ActionTypes.CANCEL_FETCH_BOOK)
+                    ))
+                )
+                req$.subscribe({
+                    complete: () => {
+                        console.log('fetchBooksEpic() complete2()')
+                        observer.next(actions.fetchingBooks(false))
+                    },
+                    next: (result) => {
+                        observer.next(actions.fetchBooksFulFilled(result.data))
+                    }
+                })
+            })
+        })
+
+    )
+}
+
+export const cancelFetchBooksEpicForType1 = (action$) => action$.pipe(
     filter((action) => action.type === ActionTypes.CANCEL_FETCH_BOOK),
     map((action) => {
         console.log('cancelFetchBooksEpic() action=', action)
