@@ -1,83 +1,11 @@
 {
-  "name": "react-course",
+  "name": "react-course-2",
   "version": "1.0.0",
-  "description": "",
-  "main": "index.js",
-  "scripts": {
-    "start": "concurrently \"react-scripts start\" \"node server.js\"",
-    "start:app": "react-scripts start",
-    "build": "react-scripts build",
-    "test": "react-scripts test -- --config jest.config.js",
-    "eslint:fix": "eslint --fix",
-    "eject": "react-scripts eject"
+  "private": true,
+  "workspaces":  {
+    "nohoist": ["**/react-scripts", "**/react-scripts/**", "**/react", "**/react-dom"],
+    "packages": ["packages/*"]
   },
-  "author": "",
-  "license": "ISC",
   "dependencies": {
-    "axios": "^0.24.0",
-    "bootstrap": "^5.1.1",
-    "chokidar": "^3.5.3",
-    "classnames": "^2.3.2",
-    "react": "^18.2.0",
-    "react-bootstrap": "^2.7.4",
-    "react-dom": "^18.2.0",
-    "react-hook-form": "^7.43.9",
-    "react-redux": "^8.0.5",
-    "react-scripts": "5.0.1",
-    "redux": "^4.2.1",
-    "redux-devtools-extension": "^2.13.9",
-    "redux-observable": "^2.0.0",
-    "redux-saga": "^1.2.3",
-    "redux-thunk": "^2.4.2",
-    "rxjs": "^7.8.1",
-    "thunk": "^0.0.1",
-    "uuid": "^9.0.0",
-    "web-vitals": "^1.1.2"
-  },
-  "devDependencies": {
-    "@babel/core": "^7.22.1",
-    "@babel/preset-env": "^7.22.2",
-    "@babel/preset-react": "^7.22.3",
-    "@testing-library/jest-dom": "^5.14.1",
-    "@testing-library/react": "^11.2.7",
-    "@testing-library/user-event": "^12.8.3",
-    "@types/react": "^18.2.6",
-    "@types/redux-saga": "^0.10.5",
-    "@typescript-eslint/eslint-plugin": "^5.59.6",
-    "babel-jest": "^29.5.0",
-    "babel-plugin-module-resolver": "^5.0.0",
-    "body-parser": "^1.19.1",
-    "concurrently": "^8.0.1",
-    "cors": "^2.8.5",
-    "eslint": "^8.41.0",
-    "eslint-config-standard-with-typescript": "^34.0.1",
-    "eslint-plugin-import": "^2.27.5",
-    "eslint-plugin-n": "^15.7.0",
-    "eslint-plugin-promise": "^6.1.1",
-    "eslint-plugin-react": "^7.32.2",
-    "express": "^4.17.1",
-    "nedb": "^1.8.0",
-    "react-scripts": "5.0.1",
-    "redux-devtools-extension": "^2.13.9",
-    "redux-saga-test-plan": "^4.0.6",
-    "typescript": "^5.0.4"
-  },
-  "eslintConfig": {
-    "extends": [
-      "react-app",
-      "react-app/jest"
-    ]
-  },
-  "browserslist": {
-    "production": [
-      ">0.2%",
-      "not dead",
-      "not op_mini all"
-    ],
-    "development": [
-      "last 1 chrome version",
-      "last 1 firefox version",
-      "last 1 safari version"
-    ]
   }
 }
