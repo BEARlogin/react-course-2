@@ -3,7 +3,7 @@ import App from './App'
 import { Provider } from 'react-redux'
 import { store } from './store'
 
-xit('renders "Book Author" title', () => {
+it('renders "Book Author" title', () => {
     render(
         <Provider store={store}>
             <App />

@@ -8,7 +8,8 @@ import booksRootSaga from './sagas/books'
 import { map, filter } from 'rxjs'
 import { combineEpics, createEpicMiddleware } from 'redux-observable'
 import { ActionTypes } from './actions/common'
-import { fetchBooksEpic } from './epics/books'
+import { fetchBooksEpic, cancelFetchBooksEpic, onFetchBooksFulFilled } from './epics/books'
+import SERVER from './actions/server'
 
 export default function * rootSaga () {
     yield all([
@@ -27,12 +28,12 @@ export const loggerEpic = (action$) => action$.pipe(
 
 export const rootEpic = combineEpics(
     loggerEpic,
-    fetchBooksEpic
-    // cancelFetchBooksEpic,
-    // onFetchBooksFulFilled
+    fetchBooksEpic,
+    cancelFetchBooksEpic,
+    onFetchBooksFulFilled
 )
 
-const epicMiddleware = createEpicMiddleware()
+const epicMiddleware = createEpicMiddleware({ dependencies: { SERVER } })
 
 const sagaMiddleware = createSagaMiddleware()
 

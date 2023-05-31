@@ -1,13 +1,12 @@
 import { ofType } from 'redux-observable'
 import { actions, ActionTypes } from '../actions/common'
 import { map, startWith, switchMap, Observable, takeUntil, timer, filter } from 'rxjs'
-import SERVER from '../actions/server'
 
 const fromPromise = (promise) => new Observable((subscriber) => {
     promise.then((result) => subscriber.next(result))
 })
 
-export const fetchBooksEpic = (action$) => {
+export const fetchBooksEpic = (action$, _, { SERVER }) => {
     return action$.pipe(
         ofType(ActionTypes.FETCH_BOOK_REQUEST),
         switchMap((action) => {
